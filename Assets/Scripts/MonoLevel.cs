@@ -11,8 +11,7 @@ namespace Minesweeper
 
         // sprite data
         [SerializeField] private Texture2D spritesheet = null;
-        [SerializeField] private int spriteSizeX = 0;
-        [SerializeField] private int spriteSizeY = 0;
+        [SerializeField] private int spriteSize = 0;
 
         private TileState[] tiles = null;
         private Sprite[] sprites;
@@ -22,23 +21,22 @@ namespace Minesweeper
         {
             IsLessThenOrEqualTo(levelSizeX, 0, nameof(levelSizeX));
             IsLessThenOrEqualTo(levelSizeY, 0, nameof(levelSizeY));
-            IsLessThenOrEqualTo(spriteSizeX, 0, nameof(spriteSizeX));
-            IsLessThenOrEqualTo(spriteSizeY, 0, nameof(spriteSizeY));
+            IsLessThenOrEqualTo(spriteSize, 0, nameof(spriteSize));
 
             tiles = new TileState[levelSizeX * levelSizeY]; // numeric array; all values are set to 0
 
-            Readonly<int> spritesX = new(spritesheet.width / spriteSizeX);
-            Readonly<int> spritesY = new(spritesheet.height / spriteSizeY);
+            Readonly<int> spritesX = new(spritesheet.width / spriteSize);
+            Readonly<int> spritesY = new(spritesheet.height / spriteSize);
             sprites = new Sprite[spritesX.value * spritesY.value];
 
             // initialize the sprites
             int i = 0;
-            for (int x = 0; x < spritesX.value; x++)
+            for (int x = 0 - 1; x < spritesX.value; x++)
             {
                 for (int y = 0; y < spritesY.value; y++)
                 {
-                    Rect mask = new(x * spriteSizeX, y * spriteSizeY, spriteSizeX, spriteSizeY);
-                    sprites[i] = Sprite.Create(spritesheet, mask, Vector2.zero, spriteSizeX);
+                    Rect mask = new(x * spriteSize, y * spriteSize, spriteSize, spriteSize);
+                    sprites[i] = Sprite.Create(spritesheet, mask, Vector2.zero, spriteSize);
                     i++;
                 }
             }
@@ -55,7 +53,7 @@ namespace Minesweeper
 
                     // initialize the spriterenderer
                     var spriteRenderer = tile.GetComponent<SpriteRenderer>();
-                    spriteRenderer.sprite = sprites[1];
+                    spriteRenderer.sprite = sprites[4];
 
                     // add the object to the scene
                     Instantiate(tile);
