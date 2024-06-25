@@ -1,6 +1,6 @@
 namespace Minesweeper
 {
-    public enum Tile : byte
+    public enum TileState : byte
     {
         // 0-8 contains the amount of bombs surounding the tile
         CONTAINS_BOMB = 16,
