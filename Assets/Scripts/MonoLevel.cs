@@ -47,16 +47,13 @@ namespace Minesweeper
                 for (int y = 0; y < levelSizeY; y++)
                 {
                     // create a new gameobject
-                    GameObject tile = new((x * y).ToString(), typeof(SpriteRenderer));
+                    GameObject tile = new(((x * levelSizeX) + y).ToString(), typeof(SpriteRenderer));
                     tile.transform.position = new Vector3(x, y, 0.0F);
                     tile.transform.parent = transform;
 
                     // initialize the spriterenderer
                     var spriteRenderer = tile.GetComponent<SpriteRenderer>();
                     spriteRenderer.sprite = sprites[4];
-
-                    // add the object to the scene
-                    Instantiate(tile);
                 }
             }
         }
