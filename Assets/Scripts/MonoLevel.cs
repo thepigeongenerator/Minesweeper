@@ -29,7 +29,7 @@ namespace Minesweeper
             Readonly<int> spritesY = new(spritesheet.height / spriteSize);
             sprites = new Sprite[spritesX.value * spritesY.value];
 
-            // initialize the sprites
+            // initialize the sprites (using transformed positions to make sure the sprite indeces are as expected)
             int i = 0;
             for (int y = spritesY.value - 1; y >= 0; y--)
             {
