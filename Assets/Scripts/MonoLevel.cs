@@ -31,9 +31,9 @@ namespace Minesweeper
 
             // initialize the sprites
             int i = 0;
-            for (int x = 0 - 1; x < spritesX.value; x++)
+            for (int y = spritesY.value - 1; y >= 0; y--)
             {
-                for (int y = 0; y < spritesY.value; y++)
+                for (int x = 0; x < spritesX.value; x++)
                 {
                     Rect mask = new(x * spriteSize, y * spriteSize, spriteSize, spriteSize);
                     sprites[i] = Sprite.Create(spritesheet, mask, Vector2.zero, spriteSize);
