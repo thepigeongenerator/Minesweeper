@@ -17,6 +17,11 @@ namespace Minesweeper
         private Sprite[] sprites;
 
 
+        public void SetTile(string tileName) {
+            int index = int.Parse(tileName);
+            throw new System.NotImplementedException();
+        }
+
         private void Awake()
         {
             IsLessThenOrEqualTo(levelSizeX, 0, nameof(levelSizeX));
@@ -47,13 +52,18 @@ namespace Minesweeper
                 for (int y = 0; y < levelSizeY; y++)
                 {
                     // create a new gameobject
-                    GameObject tile = new(((x * levelSizeX) + y).ToString(), typeof(SpriteRenderer));
+                    GameObject tile = new(((x * levelSizeX) + y).ToString(), typeof(SpriteRenderer), typeof(BoxCollider2D));
                     tile.transform.position = new Vector3(x, y, 0.0F);
                     tile.transform.parent = transform;
 
                     // initialize the spriterenderer
                     var spriteRenderer = tile.GetComponent<SpriteRenderer>();
                     spriteRenderer.sprite = sprites[4];
+
+                    // initialize the collider
+                    var collider = tile.GetComponent<BoxCollider2D>();
+                    collider.size = Vector2.one;
+                    collider.offset = new Vector2(0.5F, 0.5F);
                 }
             }
         }
