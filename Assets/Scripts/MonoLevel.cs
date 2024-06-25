@@ -14,7 +14,7 @@ namespace Minesweeper
         [SerializeField] private int spriteSizeX = 0;
         [SerializeField] private int spriteSizeY = 0;
 
-        private TileState[,] tiles = null;
+        private TileState[] tiles = null;
         private Sprite[] sprites;
 
 
@@ -25,7 +25,7 @@ namespace Minesweeper
             IsLessThenOrEqualTo(spriteSizeX, 0, nameof(spriteSizeX));
             IsLessThenOrEqualTo(spriteSizeY, 0, nameof(spriteSizeY));
 
-            tiles = new TileState[levelSizeX, levelSizeY]; // numeric array; all values are set to 0
+            tiles = new TileState[levelSizeX * levelSizeY]; // numeric array; all values are set to 0
 
             Readonly<int> spritesX = new(spritesheet.width / spriteSizeX);
             Readonly<int> spritesY = new(spritesheet.height / spriteSizeY);
@@ -38,8 +38,27 @@ namespace Minesweeper
                 for (int y = 0; y < spritesY.value; y++)
                 {
                     Rect mask = new(x * spriteSizeX, y * spriteSizeY, spriteSizeX, spriteSizeY);
-                    sprites[i] = Sprite.Create(spritesheet, mask, new Vector2(0.5F, 0.5F), spriteSizeX);
+                    sprites[i] = Sprite.Create(spritesheet, mask, Vector2.zero, spriteSizeX);
                     i++;
+                }
+            }
+
+            // initialize the level
+            for (int x = 0; x < levelSizeX; x++)
+            {
+                for (int y = 0; y < levelSizeY; y++)
+                {
+                    // create a new gameobject
+                    GameObject tile = new((x * y).ToString(), typeof(SpriteRenderer));
+                    tile.transform.position = new Vector3(x, y, 0.0F);
+                    tile.transform.parent = transform;
+
+                    // initialize the spriterenderer
+                    var spriteRenderer = tile.GetComponent<SpriteRenderer>();
+                    spriteRenderer.sprite = sprites[1];
+
+                    // add the object to the scene
+                    Instantiate(tile);
                 }
             }
         }
