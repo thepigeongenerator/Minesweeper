@@ -1,4 +1,4 @@
-namespace Minesweeper
+namespace Minesweeper.Util
 {
     public readonly struct Readonly<T> where T : struct
     {

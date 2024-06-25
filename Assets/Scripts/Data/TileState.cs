@@ -1,4 +1,4 @@
-namespace Minesweeper
+namespace Minesweeper.Data
 {
     public enum TileState : byte
     {

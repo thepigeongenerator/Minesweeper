@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Minesweeper
+namespace Minesweeper.Unity
 {
     public class MonoInput : MonoBehaviour
     {
